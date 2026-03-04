@@ -5,3 +5,9 @@ google-genai
 dotenv
 langchain_community
 langchain_google_genai
+beautifulsoup4
+requests
+fpdf
+python-dotenv
+tavily-python
+lxml
