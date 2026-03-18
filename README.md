@@ -89,13 +89,6 @@ User Query → Planning Agent → Search Agent → Extraction Agent → Summariz
 - Google Gemini API key
 - Internet connection for web scraping
 
-## Notes
-
-- Be respectful of website terms of service and robots.txt
-- Some websites may block automated requests
-- The quality of results depends on the accessibility of the websites
-- Consider using a dedicated web search API (like Tavily) for better results
-
 ## License
 MIT License
 
@@ -219,20 +212,6 @@ research("What is the impact of deforestation on climate change?")
 research("What caused the fall of the Roman Empire?")
 ```
 
-## Troubleshooting
-
-### Issue: "No module named 'langgraph'"
-**Solution**: Run `pip install -r requirements.txt`
-
-### Issue: "API key not found"
-**Solution**: Make sure you created a `.env` file with your `GEMINI_API_KEY`
-
-### Issue: "Connection timeout"
-**Solution**: Some websites may block automated requests. Try different websites or increase timeout in `config.py`
-
-### Issue: "No content extracted"
-**Solution**: Some websites have complex structures. The system will skip problematic pages and continue with others.
-
 ## Tips for Best Results
 
 1. **Be Specific**: More specific queries yield better results
@@ -270,58 +249,6 @@ Happy researching! 🔬📚
 # APP - Modular Research Assistant
 
 This folder contains the modular implementation of the AI Research Assistant with proper separation of concerns.
-
-## 📁 Folder Structure
-
-```
-APP/
-├── __init__.py                 # Package initialization
-├── main.py                     # Entry point for running the application
-├── research.py                 # Main research function
-├── config.py                   # Configuration settings
-├── document_gen.py             # PDF and JSON generation
-├── example_usage.py            # Usage examples
-├── test_app.py                 # Test suite for all modules
-│
-├── scrapping/                  # Web scraping module
-│   ├── __init__.py
-│   ├── search.py              # Search functionality (Google, Wikipedia, websites)
-│   └── extract.py             # Content extraction from URLs
-│
-└── Agents/                     # LangGraph agents module
-    ├── __init__.py
-    ├── agent_state.py         # State definition for workflow
-    ├── Agents.py              # Agent implementations (planning, search, extraction, etc.)
-    └── workflow.py            # LangGraph workflow builder
-```
-
-## 🔧 Module Descriptions
-
-### Core Files
-
-- **main.py**: Application entry point. Initialize environment and run research queries.
-- **research.py**: Contains the main `research()` function that orchestrates the entire workflow.
-- **config.py**: Centralized configuration for LLM, search, output, and other settings.
-- **document_gen.py**: Handles saving results to PDF and JSON formats with Unicode support.
-
-### scrapping/
-
-Web scraping utilities:
-- **search.py**: Search functionality including Google search, Wikipedia search, and generic website search.
-- **extract.py**: Extracts and cleans content from web pages using BeautifulSoup.
-
-### Agents/
-
-LangGraph multi-agent system:
-- **agent_state.py**: Defines `ResearchState` TypedDict for tracking workflow state.
-- **Agents.py**: Implements all agent nodes:
-  - `planning_agent`: Analyzes query and extracts search terms
-  - `search_agent`: Searches websites and finds relevant URLs
-  - `extraction_agent`: Extracts content from URLs
-  - `summarization_agent`: Generates AI-powered summary
-  - `saving_agent`: Saves results to files
-- **workflow.py**: Builds and compiles the LangGraph workflow connecting all agents.
-
 ## 🚀 Usage
 
 ### Run the test suite
@@ -366,41 +293,6 @@ result = research(
 )
 ```
 
-## 🔄 Workflow
-
-```
-Query Input
-    ↓
-Planning Agent (extract search terms)
-    ↓
-Search Agent (Google + websites + Wikipedia)
-    ↓
-Extraction Agent (scrape content from URLs)
-    ↓
-Summarization Agent (AI summary)
-    ↓
-Saving Agent (PDF + JSON export)
-    ↓
-Results Output
-```
-
-## ⚙️ Configuration
-
-Edit `config.py` to customize:
-- LLM model and parameters
-- Search limits and timeouts
-- Default websites
-- Output formats
-- Summarization settings
-
-## 🧪 Testing
-
-Run `test_app.py` to verify:
-1. All imports work correctly
-2. Workflow builds successfully
-3. Research function executes properly
-4. Files are generated correctly
-
 ## 📦 Dependencies
 
 All dependencies are in the main `requirements.txt`:
@@ -417,34 +309,3 @@ Create a `.env` file in the project root:
 ```
 GEMINI_API_KEY=your_api_key_here
 ```
-
-## 📝 Notes
-
-- All modules use proper relative imports with path setup
-- No circular dependencies
-- Each module is independently testable
-- Unicode handling in PDF generation
-- Error handling throughout the pipeline
-- Progress logging at each step
-
-## 🐛 Troubleshooting
-
-If you encounter import errors:
-1. Make sure you're running from the APP directory or have added it to your Python path
-2. Check that all `__init__.py` files exist
-3. Verify the `.env` file has your API key
-
-If content extraction fails:
-1. Some websites block automated access
-2. Try different websites in the configuration
-3. Check your internet connection
-4. Google search might be rate-limited
-
-## 📚 Next Steps
-
-- Add more search providers (DuckDuckGo, Bing, etc.)
-- Implement caching for repeated queries
-- Add database storage option
-- Create web UI with Streamlit/Gradio
-- Add support for different LLM providers
-- Implement async/parallel processing
