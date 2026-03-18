@@ -2,14 +2,6 @@
 
 A powerful research assistant built with LangGraph and AI agents that can search websites, extract relevant content, and save results in PDF and JSON formats.
 
-## Features
-
-- **Multi-Agent Architecture**: Specialized agents for planning, searching, extraction, summarization, and saving
-- **Flexible Web Scraping**: Search across multiple websites simultaneously
-- **AI-Powered Content Extraction**: Uses LLMs to extract and summarize relevant information
-- **Multiple Export Formats**: Save research results as JSON or PDF
-- **Customizable**: Specify your own websites and search parameters
-
 ## Installation
 
 1. Install required packages:
@@ -24,73 +16,15 @@ GEMINI_API_KEY=your_api_key_here
 
 ## Usage
 
-### Option 1: Python Script
-
-Run the research assistant directly:
-
-```python
-from research_assistant import research
-
-# Basic usage
-result = research("What are the latest developments in quantum computing?")
-
-# With custom websites
-result = research(
-    query="Impact of climate change on marine ecosystems",
-    websites=[
-        "https://www.nature.com",
-        "https://www.sciencedirect.com",
-        "https://oceanservice.noaa.gov"
-    ]
-)
-
-print(f"Results saved to:")
-print(f"JSON: {result['json_path']}")
-print(f"PDF: {result['pdf_path']}")
-```
-
-### Option 2: Interactive Notebook
+### Option 1: Interactive Notebook
 
 Open `expirement/main.ipynb` and run the cells to use the research assistant interactively.
-
-## How It Works
-
-The research assistant uses a multi-agent workflow:
-
-1. **Planning Agent**: Analyzes your query and extracts key search terms
-2. **Search Agent**: Searches specified websites for relevant content
-3. **Extraction Agent**: Extracts text content from discovered URLs
-4. **Summarization Agent**: Uses AI to summarize and synthesize findings
-5. **Saving Agent**: Saves results to JSON and PDF files
-
-## Output
-
-All research outputs are saved in the `research_outputs/` directory:
-- **JSON files**: Structured data with all extracted content, URLs, and metadata
-- **PDF files**: Formatted research reports with summaries and source citations
-
-## Customization
-
-You can customize:
-- **Websites to search**: Pass a list of URLs to the `websites` parameter
-- **Number of results**: Modify `max_results` in the search functions
-- **Content length**: Adjust the character limits in extraction functions
-- **Output format**: Modify the PDF and JSON generation functions
-
-## Architecture
-
-```
-User Query → Planning Agent → Search Agent → Extraction Agent → Summarization Agent → Saving Agent → Results (PDF + JSON)
-```
 
 ## Requirements
 
 - Python 3.8+
 - Google Gemini API key
 - Internet connection for web scraping
-
-## License
-MIT License
 
 # 🚀 Quick Start Guide - AI Research Assistant
 
@@ -105,8 +39,6 @@ pip install -r requirements.txt
 This will install all necessary packages:
 - langchain & langgraph (AI agent framework)
 - google-genai (Google Gemini LLM)
-- beautifulsoup4 & requests (web scraping)
-- fpdf (PDF generation)
 - python-dotenv (environment variables)
 
 ## Step 2: Set Up API Key
@@ -123,121 +55,9 @@ This will install all necessary packages:
    GEMINI_API_KEY=your_actual_api_key_here
    ```
 
-## Step 3: Run Your First Research
-
-### Option A: Using the Example Script
-
-Run the example usage script:
-
-```bash
-python example_usage.py
-```
-
-This will run several research examples and show you how the system works.
-
-### Option B: Write Your Own Script
-
-Create a new Python file:
-
-```python
-from research_assistant import research
-
-# Run a research query
-result = research("Your research question here")
-
-# Access the results
-print(f"JSON saved to: {result['json_path']}")
-print(f"PDF saved to: {result['pdf_path']}")
-print(f"Summary: {result['summary']}")
-```
-
-### Option C: Interactive Mode
-
-Run Python interactively:
-
-```python
-python
->>> from research_assistant import research
->>> result = research("What is machine learning?")
-```
-
-## Step 4: Customize (Optional)
-
-### Specify Custom Websites
-
-```python
-result = research(
-    query="Your research question",
-    websites=[
-        "https://www.nature.com",
-        "https://en.wikipedia.org",
-        "https://www.sciencedirect.com"
-    ]
-)
-```
-
-### Modify Configuration
-
-Edit `config.py` to change:
-- LLM settings (model, temperature)
-- Search parameters (max URLs, timeout)
-- Default websites
-- Output formats
-
-## Step 5: View Results
-
-All outputs are saved in the `research_outputs/` directory:
-
-- **JSON files**: Contains all extracted data, URLs, and metadata
-- **PDF files**: Formatted research report with summary and sources
-
-## Common Research Topics
-
-Try these example queries:
-
-```python
-# Technology
-research("What are the latest developments in artificial intelligence?")
-
-# Science
-research("How does CRISPR gene editing work?")
-
-# Health
-research("What are the health benefits of intermittent fasting?")
-
-# Environment
-research("What is the impact of deforestation on climate change?")
 
 # History
 research("What caused the fall of the Roman Empire?")
-```
-
-## Tips for Best Results
-
-1. **Be Specific**: More specific queries yield better results
-   - ❌ "AI"
-   - ✅ "How do transformer models work in natural language processing?"
-
-2. **Choose Relevant Websites**: Select websites that are likely to have the information
-   ```python
-   # For medical research
-   websites=["https://pubmed.ncbi.nlm.nih.gov", "https://www.mayoclinic.org"]
-   
-   # For technology news
-   websites=["https://techcrunch.com", "https://arstechnica.com"]
-   ```
-
-3. **Review and Refine**: The AI summary may need human verification. Always review the sources.
-
-4. **Respect Rate Limits**: Don't make too many requests in quick succession
-
-## Next Steps
-
-- Explore the full codebase in `research_assistant.py`
-- Modify agent prompts to customize behavior
-- Add new export formats (Word, HTML, etc.)
-- Integrate with other tools (databases, email, etc.)
-- Build a web interface using Streamlit or Gradio
 
 ## Need Help?
 
@@ -267,19 +87,6 @@ python example_usage.py
 ```bash
 cd APP
 python main.py
-```
-
-### Use as a module
-```python
-import sys
-sys.path.insert(0, 'path/to/APP')
-
-from research import research
-
-result = research("Your research question here")
-print(f"JSON: {result['json_path']}")
-print(f"PDF: {result['pdf_path']}")
-print(f"Summary: {result['summary']}")
 ```
 
 ### Custom websites
